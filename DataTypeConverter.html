@@ -9,8 +9,15 @@
 			var floatValueBox;
 			var I4ValueBox;
 			var UI4ValueBox;
+			
+			if(window.addEventListener){
+				window.addEventListener('load',onPageLoad,false); //W3C
+			}
+			else{
+				window.attachEvent('onload',onPageLoad); //IE
+			}
 
-			function onLoad()
+			function onPageLoad()
 			{	
 				binaryRegister1Box = document.getElementById('binaryRegister1').value;
 				binaryRegister2Box = document.getElementById('binaryRegister2').value;
@@ -22,7 +29,7 @@
 			}
 		</script>
 	</head>
-	<body onload="onLoad();">
+	<body onload="onPageLoad();">
 		<h2>Under Construction</h2>
 		Binary: <input type="text" id="binaryRegister1" onChange="BinaryChanged()" />
 		<input type="text" id="binaryRegister2" onChange="BinaryChanged()" />
