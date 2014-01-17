@@ -2,8 +2,12 @@
 	<head>
 		<link href="stylesheets/DataTypeConverter.css" rel="stylesheet" type="text/css">
 		<script src="scripts/DataTypeConverter.js"></script>
+		
+		<link rel="stylesheet" href="/stylesheets/qunit.css">
 	</head>
 	<body>
+		<div id="qunit-fixture"></div>
+		<script src="/scripts/qunit.js"></script>
 		<div id="header">
 			<h1>Data Type Converter</h1>
 			<h2>Under Construction</h2>
@@ -54,7 +58,7 @@
 					<td>
 						Hex:
 					</td>
-					<td colspan="2">
+					<td>
 						<input type="text" id="hexValue" onChange="HexChanged()"/>
 					</td>
 				</tr>
@@ -66,7 +70,7 @@
 						<input type="text" id="floatValue" onChange="FloatChanged()"/>
 					</td>
 				</tr>
-								<tr>
+				<tr>
 					<td>
 						Signed 32bit Integer:
 					</td>
@@ -83,6 +87,9 @@
 					</td>
 				</tr>
 			</table>
+		</div>
+		<div id="footer">
+			<a href="http://josephschrag.com">JosephSchrag.com</a>
 		</div>
 	</body>
 </html>
