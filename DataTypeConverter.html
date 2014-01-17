@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<link href="stylesheets/DataTypeConverter.css" rel="stylesheet" type="text/css">
+		<script src="scripts/DataTypeConverter.js"></script>
+		<script>
+			var binaryRegister1Box;
+			var binaryRegister2Box;
+			var hexValueBox;
+			var floatValueBox;
+			var I4ValueBox;
+			var UI4ValueBox;
+
+			function onLoad()
+			{	
+				binaryRegister1Box = document.getElementById('binaryRegister1').value;
+				binaryRegister2Box = document.getElementById('binaryRegister2').value;
+				hexValueBox = document.getElementById('hexValue').value;
+				floatValueBox = document.getElementById('floatValue').value;
+				I4ValueBox = document.getElementById('I4Value').value;
+				UI4ValueBox = document.getElementById('UI4Value').value;
+				alert("Load");
+			}
+		</script>
+	</head>
+	<body onload="onLoad();">
+		<h2>Under Construction</h2>
+		Binary: <input type="text" id="binaryRegister1" onChange="BinaryChanged()" />
+		<input type="text" id="binaryRegister2" onChange="BinaryChanged()" />
+		<br /><br />
+
+		Hex: <input type="text" id="hexValue"/><br />
+		Float: <input type="text" id="floatValue"/><br />
+		Signed 32bit Integer: <input id="text" name="I4Value"/><br />
+		Unsigned 32bit Integer: <input id="text" name="UI4Value"/><br />
+	</body>
+</html>
