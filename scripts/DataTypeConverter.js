@@ -5,21 +5,19 @@ var floatValueBox;
 var I4ValueBox;
 var UI4ValueBox;
 
-function onLoad()
-{	
-	binaryRegister1Box = document.getElementById('binaryRegister1').value;
-	binaryRegister2Box = document.getElementById('binaryRegister2').value;
-	hexValueBox = document.getElementById('hexValue').value;
-	floatValueBox = document.getElementById('floatValue').value;
-	I4ValueBox = document.getElementById('I4Value').value;
-	UI4ValueBox = document.getElementById('UI4Value').value;
-	alert("Load");
+window.onload = function()
+{
+	binaryRegister1Box = document.getElementById('binaryRegister1');
+	binaryRegister2Box = document.getElementById('binaryRegister2');
+	hexValueBox = document.getElementById('hexValue');
+	floatValueBox = document.getElementById('floatValue');
+	I4ValueBox = document.getElementById('I4Value');
+	UI4ValueBox = document.getElementById('UI4Value');
 }
 
-//Convert binary to raw value & place in UI4 box
 function BinaryChanged()
 {
-	var numberOfPlaces = 32;
+	var numberOfPlaces = 16;
 
 	var zero = "";
 	for (var i = 0; i < numberOfPlaces; i++)
@@ -27,30 +25,68 @@ function BinaryChanged()
 		zero += "0";
 	}
 	
-	var binaryString = zero + binaryRegister1Box.value + binaryRegister2Box.value;
-	binaryString = binaryString.slice(-32);
-	
+	var binaryString1 = zero + binaryRegister1Box.value;
+	var binaryString2 = zero + binaryRegister2Box.value;
+	binaryString1 = binaryString1.slice(-16);
+	binaryString2 = binaryString2.slice(-16);
+	var binaryString = binaryString1 + binaryString2;
+alert(binaryString);
 	var result = 0;
 	
 	for (var i = 0; i < numberOfPlaces; i++)
 	{
-		result += binaryString[i]*2^i;
+		var character = binaryString.slice(i, i + 1);
+		var bit = parseInt(character);
+		result += bit*2^i;
 	}
-	UI4ValueBox.value = result;
-	UI4Changed();
-}
-
-function UI4Changed()
-{
-	var rawValue = UI4ValueBox.value;
-	hexValueBox.value = rawValue.toString(16);
-	//set I4Value
-	//set float value
 	
+	
+	var intArray = new Int32Array(1);
+	intArray[0] = result;
+	SetValues(intArray.buffer);
 }
 
 function HexChanged()
 {
 	var hexString = hexValueBox.value;
-	UI4ValueBox.value = parseInt(hexString, 16);
+	var temp = parseInt(hexString, 16);
+	
+	var intArray = new Int32Array(1);
+	intArray[0] = temp;
+	SetValues(intArray.buffer);
+}
+
+function FloatChanged()
+{
+	var floatArray = new Float32Array(1);
+	floatArray[0] = parseFloat(floatValueBox.value);
+	SetValues(floatArray.buffer);
+}
+
+function I4Changed()
+{
+	var intArray = new Int32Array(1);
+	intArray[0] = parseInt(I4ValueBox.value);
+	SetValues(intArray.buffer);
+}
+
+function UI4Changed()
+{
+	var uIntArray = new Uint32Array(1);
+	uIntArray[0] = parseInt(I4ValueBox.value);
+	SetValues(uIntArray.buffer);
+}
+
+function SetValues(rawValueBuffer)
+{
+	var floatArray = new Int32Array(rawValueBuffer);
+	floatValueBox.value = floatArray[0];
+	
+	var intArray = new Int32Array(floatArray.buffer);
+	I4ValueBox.value = intArray[0];
+	
+	var uIntArray = new Uint32Array(rawValueBuffer);
+	UI4ValueBox.value = uIntArray[0];
+	
+	hexValueBox.value = intArray[0].toString(16);
 }
