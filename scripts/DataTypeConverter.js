@@ -2,10 +2,10 @@ var firstShortBox;
 var secondShortBox;
 var firstBinaryBox;
 var secondBinaryBox;
-var hexValueBox;
-var floatValueBox;
-var I4ValueBox;
-var UI4ValueBox;
+var hexBox;
+var floatBox;
+var int32Box;
+var uInt32Box;
 
 window.onload = function()
 {
@@ -13,10 +13,10 @@ window.onload = function()
 	secondShortBox = document.getElementById('secondShort');
 	firstBinaryBox = document.getElementById('firstBinary');
 	secondBinaryBox = document.getElementById('secondBinary');
-	hexValueBox = document.getElementById('hexValue');
-	floatValueBox = document.getElementById('floatValue');
-	I4ValueBox = document.getElementById('I4Value');
-	UI4ValueBox = document.getElementById('UI4Value');
+	hexBox = document.getElementById('hexBox');
+	floatBox = document.getElementById('floatBox');
+	int32Box = document.getElementById('int32Box');
+	uInt32Box = document.getElementById('uInt32Box');
 }
 
 function SwapRegisters()
@@ -25,7 +25,7 @@ function SwapRegisters()
 }
 
 //incoming values expected to be signed 16 bit integers
-function RegistersChanged()
+function ShortChanged()
 {
 	var temp = parseInt(firstShortBox.value);
 	var intArray = new Int16Array(2);
@@ -51,7 +51,7 @@ function BinaryChanged()
 
 function HexChanged()
 {
-	var hexString = hexValueBox.value;
+	var hexString = hexBox.value;
 	var temp = parseInt(hexString, 16);
 	
 	var intArray = new Int32Array(1);
@@ -62,36 +62,36 @@ function HexChanged()
 function FloatChanged()
 {
 	var floatArray = new Float32Array(1);
-	floatArray[0] = parseFloat(floatValueBox.value);
+	floatArray[0] = parseFloat(floatBox.value);
 	SetValues(floatArray.buffer);
 }
 
-function I4Changed()
+function Int32Changed()
 {
 	var intArray = new Int32Array(1);
-	intArray[0] = parseInt(I4ValueBox.value);
+	intArray[0] = parseInt(int32Box.value);
 	SetValues(intArray.buffer);
 }
 
-function UI4Changed()
+function UInt32Changed()
 {
 	var uIntArray = new Uint32Array(1);
-	uIntArray[0] = parseInt(UI4ValueBox.value);
+	uIntArray[0] = parseInt(uInt32Box.value);
 	SetValues(uIntArray.buffer);
 }
 
 function SetValues(rawValueBuffer)
 {
 	var floatArray = new Float32Array(rawValueBuffer);
-	floatValueBox.value = floatArray[0].toString();
+	floatBox.value = floatArray[0].toString();
 	
 	var intArray = new Int32Array(rawValueBuffer);
-	I4ValueBox.value = intArray[0].toString();
+	int32Box.value = intArray[0].toString();
 	
 	var uIntArray = new Uint32Array(rawValueBuffer);
-	UI4ValueBox.value = uIntArray[0].toString();
+	uInt32Box.value = uIntArray[0].toString();
 	
-	hexValueBox.value = intArray[0].toString(16);
+	hexBox.value = intArray[0].toString(16);
 	
 	var shortArray = new Int16Array(rawValueBuffer, 0, 2);
 	firstShortBox.value = shortArray[0];
