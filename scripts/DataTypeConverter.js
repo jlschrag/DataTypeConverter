@@ -99,3 +99,15 @@ function SetValues(rawValueBuffer)
 	firstBinaryBox.value = shortArray[0].toString(2);
 	secondBinaryBox.value = shortArray[1].toString(2);
 }
+
+function ClearAll()
+{
+	var elements = document.getElementsByTagName("input");
+	for (var i=0; i < elements.length; i++)
+	{
+		if (elements[i].type == "text")
+		{
+			elements[i].value = "";
+		}
+	}
+}
