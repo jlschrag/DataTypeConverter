@@ -9,6 +9,8 @@ var uInt32Box;
 
 window.onload = function()
 {
+	document.getElementById('qunit').style.display = 'none';
+
 	firstShortBox = document.getElementById('firstShort');
 	secondShortBox = document.getElementById('secondShort');
 	firstBinaryBox = document.getElementById('firstBinary');
@@ -91,7 +93,7 @@ function SetValues(rawValueBuffer)
 	var uIntArray = new Uint32Array(rawValueBuffer);
 	uInt32Box.value = uIntArray[0].toString();
 	
-	hexBox.value = intArray[0].toString(16);
+	hexBox.value = Math.abs(intArray[0]).toString(16);
 	
 	var shortArray = new Int16Array(rawValueBuffer, 0, 2);
 	firstShortBox.value = shortArray[0];
@@ -110,4 +112,12 @@ function ClearAll()
 			elements[i].value = "";
 		}
 	}
+}
+
+function ShowHideUnitTests()
+{
+	var element = document.getElementById('qunit');
+	
+	if(element.style.display === 'block') element.style.display = 'none';
+	else element.style.display = 'block';
 }

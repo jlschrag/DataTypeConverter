@@ -35,7 +35,7 @@
 				</tr>
 				<tr>
 					<td>
-						Binary:
+						Binary (2s Complement):
 					</td>
 					<td>
 						<input type="text" id="secondBinary" onChange="BinaryChanged()" />
@@ -87,12 +87,13 @@
 			</table>
 		</div>
 		<br /><br />
+		<button id="showHideUnitTestsButton" onClick="ShowHideUnitTests()">Show/Hide Unit Tests</button>
 		<div id="qunit"></div><!--Delete or hide this div after testing is complete -->
 		<div id="qunit-fixture"></div>
 		<script src="scripts/qunit.js"></script>
 		<script src="scripts/tests.js"></script>
 		<div id="footer">
-			<a href="http://josephschrag.com">JosephSchrag.com</a>
+			<!--<a href="http://josephschrag.com">JosephSchrag.com</a>-->
 		</div>
 	</body>
 </html>
