@@ -21,11 +21,6 @@ window.onload = function()
 	uInt32Box = document.getElementById('uInt32Box');
 }
 
-function SwapRegisters()
-{
-	alert("Register swap not yet implemented");
-}
-
 //incoming values expected to be signed 16 bit integers
 function ShortChanged()
 {
