@@ -93,8 +93,16 @@ function SetValues(rawValueBuffer)
 	var shortArray = new Int16Array(rawValueBuffer, 0, 2);
 	firstShortBox.value = shortArray[0];
 	secondShortBox.value = shortArray[1];
-	firstBinaryBox.value = shortArray[0].toString(2);
-	secondBinaryBox.value = shortArray[1].toString(2);
+	
+	//Convert to Two's Complement if negative
+	if (shortArray[0] < 0) firstBinaryBox.value = (0xFFFF + shortArray[0] + 1).toString(2);
+	else firstBinaryBox.value = shortArray[0].toString(2);
+	
+	if (shortArray[1] < 0) secondBinaryBox.value = (0xFFFF + shortArray[1] + 1).toString(2);
+	else secondBinaryBox.value = shortArray[1].toString(2);
+	
+	firstBinaryBox.value = "0000000000000000".slice(0, 16 - firstBinaryBox.value.length) + firstBinaryBox.value;
+	secondBinaryBox.value = "0000000000000000".slice(0, 16 - secondBinaryBox.value.length) + secondBinaryBox.value;
 }
 
 function ClearAll()
