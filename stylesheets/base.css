@@ -27,19 +27,3 @@ h1 {
 #aboutme a {
 	color: #6495ED;
 }
-
-#resources {
-	background: rgba(255, 255, 255, .9);
-	position: relative;
-	top: 230px;
-	left: 50px;
-	width: 350px;
-	padding: 20px;
-	font-size: 20;
-	color: #707070;
-	font-family: Helvetica;
-}
-
-#resources a {
-	color: #6495ED;
-}
