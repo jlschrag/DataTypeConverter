@@ -7,8 +7,15 @@
 	</head>
 	<body>
 		<div id="header">
-			<h1>Data Type Converter</h1>
-			<h3>Enter a value in any box, press enter, and the rest will be calculated "live".</h3>
+			<div id="headerInside">
+				<div id="imageContainer">
+					<img src="images/arrowCircle.png" />
+				</div>
+				<div id="textContainer">
+					<h1>Data Type Converter</h1>
+					<h3>Enter a value in any box, press enter, and the rest will be calculated "live".</h3>
+				</div>
+			</div>
 		</div>
 		<div id="main">
 			<table id="mainTable">
@@ -75,15 +82,11 @@
 						<input type="text" id="uInt32Box" onChange="UInt32Changed()"/>
 					</td>
 				</tr>
-				<tr>
-					<td colspan="3">
-						<br /><br />
-						<button id="showHideUnitTestsButton" onClick="ShowHideUnitTests()">Show/Hide Unit Tests</button>
-					</td>
-				</tr>
 			</table>
 		</div>
-		<br /><br />
+		<div id="showHideUnitTestsDiv">
+			<button id="showHideUnitTestsButton" onClick="ShowHideUnitTests()">Show/Hide Unit Tests</button>
+		</div>
 		<div id="qunit"></div><!--Delete or hide this div after testing is complete -->
 		<div id="qunit-fixture"></div>
 		<script src="scripts/qunit.js"></script>
