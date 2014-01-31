@@ -62,3 +62,11 @@ body {
 #showHideUnitTestsButton {
 	width:100%;	
 }
+
+h3 {
+	text-align: center;
+}
+
+#main  #spacerRow {
+	height: 3em;
+}

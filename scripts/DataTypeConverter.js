@@ -7,6 +7,9 @@ var floatBox;
 var int32Box;
 var uInt32Box;
 
+var dateTimeBox;
+var unixTimeBox;
+
 window.onload = function()
 {
 	document.getElementById('qunit').style.display = 'none';
@@ -19,6 +22,9 @@ window.onload = function()
 	floatBox = document.getElementById('floatBox');
 	int32Box = document.getElementById('int32Box');
 	uInt32Box = document.getElementById('uInt32Box');
+	
+	dateTimeBox = document.getElementById('dateTimeBox');
+	unixTimeBox = document.getElementById('unixTimeBox');
 }
 
 //incoming values expected to be signed 16 bit integers
@@ -105,6 +111,19 @@ function SetValues(rawValueBuffer)
 	secondBinaryBox.value = "0000000000000000".slice(0, 16 - secondBinaryBox.value.length) + secondBinaryBox.value;
 }
 
+function DateTimeChanged()
+{
+	var dateTime = new Date(dateTimeBox.value);
+	var unixSeconds = Math.round(dateTime.getTime() / 1000);
+	unixTimeBox.value = unixSeconds;
+}
+
+function UnixTimeChanged()
+{
+	var dateTime = new Date(parseInt(unixTimeBox.value) * 1000);
+	dateTimeBox.value = dateTime.toUTCString();
+}
+
 function ClearAll()
 {
 	var elements = document.getElementsByTagName("input");
@@ -115,6 +134,22 @@ function ClearAll()
 			elements[i].value = "";
 		}
 	}
+}
+
+function InitializeForm()
+{
+	firstShortBox.value = "0";
+	secondShortBox.value = "0";
+	firstBinaryBox.value = "0";
+	secondBinaryBox.value = "0";
+	hexBox.value = "0";
+	floatBox.value = "0";
+	int32Box.value = "0";
+	uInt32Box.value = "0";
+
+	var currentDateTime = new Date();
+	dateTimeBox.value = currentDateTime.toUTCString();
+	unixTimeBox.value = Math.round(currentDateTime.getTime() / 1000);
 }
 
 function ShowHideUnitTests()
