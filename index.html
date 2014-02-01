@@ -1,16 +1,132 @@
 <html>
 	<head>
-		<link href="stylesheets/base.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="stylesheets/DataTypeConverter.css" type="text/css">
+		<script src="scripts/DataTypeConverter.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/qunit.css">
 	</head>
 	<body>
-		<div id="aboutme">
-			<h1>Joseph Schrag</h1>
-			<br /><br />
-			I am a software developer currently writing protocol drivers for industrial automation devices.  I've filled both programming & agile software engineering roles and love both.
-			<br /><br />
-			I want to write software that improves people's lives.  There is nothing like seeing a smile on the face of my users.
-			<br /><br />
-			You can learn more about me on <a href="http://linkedin.com/in/josephschrag" target="_blank">LinkedIn</a>, <a href="https://github.com/jlschrag" target="_blank">GitHub</a>, or take a look at my <a href="http://blog.josephschrag.com" target="_blank">blog</a>.		
+		<div id="header">
+			<div id="headerInside">
+				<div id="imageContainer">
+					<img src="images/arrowCircle.png" />
+				</div>
+				<div id="textContainer">
+					<h1>Data Type Converter</h1>
+					<h3>Enter a value in any box, press enter, and the rest will be calculated "live".</h3>
+				</div>
+			</div>
+		</div>
+		<div id="main">
+			<table id="mainTable">
+				<tr>
+					<td></td>
+					<td colspan="2">
+						<h3>Reinterpret Cast</h3>
+					</td>
+				</tr>
+				<tr id="mainTableHeaderRow">
+					<td></td>
+					<td>
+						Register 2
+					</td>
+					<td>
+						Register 1
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Signed 16bit:
+					</td>
+					<td>
+						<input type="text" id="secondShort" onChange="ShortChanged()" />
+					</td>
+					<td>
+						<input type="text" id="firstShort" onChange="ShortChanged()" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Binary (2s Complement):
+					</td>
+					<td>
+						<input type="text" id="secondBinary" onChange="BinaryChanged()" />
+					</td>
+					<td>
+						<input type="text" id="firstBinary" onChange="BinaryChanged()" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Hex:
+					</td>
+					<td colspan="2">
+						<input type="text" id="hexBox" onChange="HexChanged()"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Float:
+					</td>
+					<td colspan="2">
+						<input type="text" id="floatBox" onChange="FloatChanged()"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Signed 32bit Integer:
+					</td>
+					<td colspan="2">
+						<input type="text" id="int32Box" onChange="Int32Changed()"/>
+					</td>
+				</tr>
+								<tr>
+					<td>
+						Unsigned 32bit Integer:
+					</td>
+					<td colspan="2">
+						<input type="text" id="uInt32Box" onChange="UInt32Changed()"/>
+					</td>
+				</tr>
+				<tr id="spacerRow"></tr>
+				<tr>
+					<td></td>
+					<td colspan="2">
+						<h3>Time Conversion</h3>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Date/Time
+					</td>
+					<td colspan="2">
+						<input type="text" id="dateTimeBox" onChange="DateTimeChanged()"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Unix time
+					</td>
+					<td colspan="2">
+						<input type="text" id="unixTimeBox" onChange="UnixTimeChanged()"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						(seconds since Jan 1, 1970)
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="showHideUnitTestsDiv">
+			<button id="showHideUnitTestsButton" onClick="ShowHideUnitTests()">Show/Hide Unit Tests</button>
+		</div>
+		<div id="qunit"></div><!--Delete or hide this div after testing is complete -->
+		<div id="qunit-fixture"></div>
+		<script src="scripts/qunit.js"></script>
+		<script src="scripts/tests.js"></script>
+		<div id="footer">
+			<!--<a href="http://josephschrag.com">JosephSchrag.com</a>-->
 		</div>
 	</body>
 </html>
