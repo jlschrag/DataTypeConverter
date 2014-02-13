@@ -70,3 +70,8 @@ h3 {
 #main  #spacerRow {
 	height: 3em;
 }
+
+#headerTable {
+	text-align: center;
+	width: 100%;
+}
