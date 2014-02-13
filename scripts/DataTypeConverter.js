@@ -27,6 +27,14 @@ window.onload = function()
 	unixTimeBox = document.getElementById('unixTimeBox');
 }
 
+function SwapRegisters()
+{
+	var temp = firstShortBox.value;
+	firstShortBox.value = secondShortBox.value;
+	secondShortBox.value = temp;
+	ShortChanged();
+}
+
 //incoming values expected to be signed 16 bit integers
 function ShortChanged()
 {
