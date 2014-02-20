@@ -27,7 +27,7 @@ window.onload = function()
 	unixTimeBox = document.getElementById('unixTimeBox');
 }
 
-function SwapRegisters()
+function SwapShorts()
 {
 	var temp = firstShortBox.value;
 	firstShortBox.value = secondShortBox.value;
