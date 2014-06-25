@@ -1,3 +1,5 @@
+//Ensure that an entry of zero in any textbox
+//yields a zero in all other textboxes
 function ResultsZero()
 {
 	deepEqual(firstShortBox.value, "0", "");
@@ -55,8 +57,9 @@ test ( "UInt32: Zero", function() {
 	ResultsZero();
 });
 
-//------------------------------------------------------------------
-
+//Ensure that a value of seven entered in any textbox
+//in the appropriate format results in the appropriate
+//value in all other textboxes
 function ResultsSeven()
 {
 	deepEqual(firstShortBox.value, "7", "");
@@ -114,8 +117,8 @@ test ( "UInt32: 7", function() {
 	ResultsSeven();
 });
 
-//------------------------------------------------------------------
-
+//Ensure that a value of negative seven entered in any textbox
+//results in the appropriate value in all other textboxes
 function ResultsNegativeSeven()
 {
 	deepEqual(firstShortBox.value, "-7", "");
@@ -173,8 +176,10 @@ test ( "UInt32: -7", function() {
 	ResultsNegativeSeven();
 });
 
-//------------------------------------------------------------------
-
+//Ensure that entering the maximum value for a 16 bit integer
+//in any textbox (in the appropriate format)
+//results in the maximum 16 bit integer value
+//in all other textboxes (again in the appropriate format)
 function ResultsFirstShortMax()
 {
 	deepEqual(firstShortBox.value, "32767", "");
@@ -232,8 +237,10 @@ test ( "UInt32: FirstShortMax", function() {
 	ResultsFirstShortMax();
 });
 
-//------------------------------------------------------------------
-
+//Ensure that entering the minimum value for a 16 bit integer
+//in any textbox (in the appropriate format)
+//results in the minimum 16 bit integer value
+//in all other textboxes (again in the appropriate format)
 function ResultsFirstShortMin()
 {
 	deepEqual(firstShortBox.value, "-32768", "");
@@ -291,8 +298,9 @@ test ( "UInt32: FirstShortMin", function() {
 	ResultsFirstShortMin();
 });
 
-//------------------------------------------------------------------
-
+//Ensure that entering the maximum value for a 16 bit integer
+//in the second Int16 textbox results in the
+//appropriate value in all other text boxes and vice versa
 function ResultsSecondShortMax()
 {
 	deepEqual(firstShortBox.value, "0", "");
@@ -343,8 +351,9 @@ test ( "UInt32: SecondShortMax", function() {
 	ResultsSecondShortMax();
 });
 
-//------------------------------------------------------------------
-
+//Ensure that entering the minimum value for a 16 bit integer
+//in the second Int16 textbox results in the
+//appropriate value in all other text boxes and vice versa
 function ResultsSecondShortMin()
 {
 	deepEqual(firstShortBox.value, "0", "");
@@ -395,8 +404,9 @@ test ( "UInt32: SecondShortMin", function() {
 	ResultsSecondShortMin();
 });
 
-//------------------------------------------------------------------
-
+//Ensure that entering the maximum value for a 16 bit integer
+//in both Int16 textboxes results in the appropriate value
+//in all other textboxes & vice versa
 function ResultsBothShortsMax()
 {
 	deepEqual(firstShortBox.value, "32767", "");
@@ -446,116 +456,8 @@ test ( "UInt32: BothShortsMax", function() {
 	
 	ResultsBothShortsMax();
 });
-//------------------------------------------------------------------
-
-function ResultsIntMax()
-{
-	deepEqual(firstShortBox.value, "-1", "");
-	deepEqual(secondShortBox.value, "32767", "");
-	deepEqual(firstBinaryBox.value, "1111111111111111", "");
-	deepEqual(secondBinaryBox.value, "0111111111111111", "");
-	deepEqual(hexBox.value, "7fffffff", "");
-	deepEqual(floatBox.value, "NaN", "");
-	deepEqual(int32Box.value, "2147483647", "");
-	deepEqual(uInt32Box.value, "2147483647", "");
-}
-
-test ( "Shorts: IntMax", function() {
-	ClearAll();
-	firstShortBox.value = "-1";
-	secondShortBox.value = "32767";
-	secondShortBox.onchange();
-	
-	ResultsIntMax();
-});
-test ( "Binaries: IntMax", function() {
-	ClearAll();
-	firstBinaryBox.value = "1111111111111111";
-	secondBinaryBox.value = "0111111111111111";
-	secondBinaryBox.onchange();
-	
-	ResultsIntMax();
-});
-test ( "Hex: IntMax", function() {
-	ClearAll();
-	hexBox.value = "7fffffff";
-	hexBox.onchange();
-	
-	ResultsIntMax();
-});
-test ( "Int32: IntMax", function() {
-	ClearAll();
-	int32Box.value = "2147483647";
-	int32Box.onchange();
-	
-	ResultsIntMax();
-});
-test ( "UInt32: IntMax", function() {
-	ClearAll();
-	uInt32Box.value = "2147483647";
-	uInt32Box.onchange();
-	
-	ResultsIntMax();
-});
-//------------------------------------------------------------------
-
-function ResultsIntMin()
-{
-	deepEqual(firstShortBox.value, "0", "");
-	deepEqual(secondShortBox.value, "-32768", "");
-	deepEqual(firstBinaryBox.value, "0000000000000000", "");
-	deepEqual(secondBinaryBox.value, "1000000000000000", "");
-	deepEqual(hexBox.value, "80000000", "");
-	deepEqual(floatBox.value, "0", "");
-	deepEqual(int32Box.value, "-2147483648", "");
-	deepEqual(uInt32Box.value, "2147483648", "");
-}
-
-test ( "Shorts: IntMin", function() {
-	ClearAll();
-	firstShortBox.value = "0";
-	secondShortBox.value = "-32768";
-	secondShortBox.onchange();
-	
-	ResultsIntMin();
-});
-test ( "Binaries: IntMin", function() {
-	ClearAll();
-	firstBinaryBox.value = "0000000000000000";
-	secondBinaryBox.value = "1000000000000000";
-	secondBinaryBox.onchange();
-	
-	ResultsIntMin();
-});
-test ( "Hex: IntMin", function() {
-	ClearAll();
-	hexBox.value = "80000000";
-	hexBox.onchange();
-	
-	ResultsIntMin();
-});
-test ( "Int32: IntMin", function() {
-	ClearAll();
-	int32Box.value = "-2147483648";
-	int32Box.onchange();
-	
-	ResultsIntMin();
-});
-test ( "UInt32: IntMin", function() {
-	ClearAll();
-	uInt32Box.value = "2147483648";
-	uInt32Box.onchange();
-	
-	ResultsIntMin();
-});
 
 //Tests to write:
 //max & min values of float
 //all max values plus one
 //all min values minus one
-
-//This test exists only to clear the text boxes
-test ( "Testing Complete", function() {
-	deepEqual(1, 1, "Testing Complete");
-	InitializeForm();
-});
