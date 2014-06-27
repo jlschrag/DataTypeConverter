@@ -11,7 +11,6 @@ function ResultsIntMax()
 }
 
 test ( "Shorts: IntMax", function() {
-	ClearAll();
 	firstShortBox.value = "-1";
 	secondShortBox.value = "32767";
 	secondShortBox.onchange();
@@ -19,7 +18,6 @@ test ( "Shorts: IntMax", function() {
 	ResultsIntMax();
 });
 test ( "Binaries: IntMax", function() {
-	ClearAll();
 	firstBinaryBox.value = "1111111111111111";
 	secondBinaryBox.value = "0111111111111111";
 	secondBinaryBox.onchange();
@@ -27,21 +25,18 @@ test ( "Binaries: IntMax", function() {
 	ResultsIntMax();
 });
 test ( "Hex: IntMax", function() {
-	ClearAll();
 	hexBox.value = "7fffffff";
 	hexBox.onchange();
 	
 	ResultsIntMax();
 });
 test ( "Int32: IntMax", function() {
-	ClearAll();
 	int32Box.value = "2147483647";
 	int32Box.onchange();
 	
 	ResultsIntMax();
 });
 test ( "UInt32: IntMax", function() {
-	ClearAll();
 	uInt32Box.value = "2147483647";
 	uInt32Box.onchange();
 	
@@ -62,7 +57,6 @@ function ResultsIntMin()
 }
 
 test ( "Shorts: IntMin", function() {
-	ClearAll();
 	firstShortBox.value = "0";
 	secondShortBox.value = "-32768";
 	secondShortBox.onchange();
@@ -70,7 +64,6 @@ test ( "Shorts: IntMin", function() {
 	ResultsIntMin();
 });
 test ( "Binaries: IntMin", function() {
-	ClearAll();
 	firstBinaryBox.value = "0000000000000000";
 	secondBinaryBox.value = "1000000000000000";
 	secondBinaryBox.onchange();
@@ -78,21 +71,18 @@ test ( "Binaries: IntMin", function() {
 	ResultsIntMin();
 });
 test ( "Hex: IntMin", function() {
-	ClearAll();
 	hexBox.value = "80000000";
 	hexBox.onchange();
 	
 	ResultsIntMin();
 });
 test ( "Int32: IntMin", function() {
-	ClearAll();
 	int32Box.value = "-2147483648";
 	int32Box.onchange();
 	
 	ResultsIntMin();
 });
 test ( "UInt32: IntMin", function() {
-	ClearAll();
 	uInt32Box.value = "2147483648";
 	uInt32Box.onchange();
 	
