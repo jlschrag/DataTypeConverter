@@ -411,8 +411,3 @@ test ( "UInt32: BothShortsMax", function() {
 	
 	ResultsBothShortsMax();
 });
-
-//Tests to write:
-//max & min values of float
-//all max values plus one
-//all min values minus one
