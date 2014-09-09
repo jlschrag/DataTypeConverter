@@ -5,4 +5,4 @@ This converter essentially does reinterpret casting between types. So, the actua
 
 I will also be adding other functionality as needed: unix time conversion, ascii conversion, etc.
 
-To use it, simply load index.html
+To use it, simply visit jlschrag.github.com/DataTypeConverter/
