@@ -6,6 +6,7 @@ var hexBox;
 var floatBox;
 var int32Box;
 var uInt32Box;
+var asciiBox;
 
 var dateTimeBox;
 var unixTimeBox;
@@ -22,6 +23,7 @@ window.onload = function()
 	floatBox = document.getElementById('floatBox');
 	int32Box = document.getElementById('int32Box');
 	uInt32Box = document.getElementById('uInt32Box');
+	asciiBox = document.getElementById('asciiBox');
 	
 	dateTimeBox = document.getElementById('dateTimeBox');
 	unixTimeBox = document.getElementById('unixTimeBox');
@@ -38,12 +40,9 @@ function SwapShorts()
 //incoming values expected to be signed 16 bit integers
 function ShortChanged()
 {
-	var temp = parseInt(firstShortBox.value);
 	var intArray = new Int16Array(2);
-	intArray[0] = temp;
-
-	temp = parseInt(secondShortBox.value);
-	intArray[1] = temp;
+	intArray[0] = parseInt(firstShortBox.value);
+	intArray[1] = parseInt(secondShortBox.value);
 
 	SetValues(intArray.buffer);
 }
@@ -51,22 +50,17 @@ function ShortChanged()
 function BinaryChanged()
 {
 	var intArray = new Int16Array(2);
-	var temp = parseInt(firstBinaryBox.value, 2);
-	intArray[0] = temp;
-
-	temp = parseInt(secondBinaryBox.value, 2);
-	intArray[1] = temp;
+	intArray[0] = parseInt(firstBinaryBox.value, 2);
+	intArray[1] = parseInt(secondBinaryBox.value, 2);
 
 	SetValues(intArray.buffer);
 }
 
 function HexChanged()
-{
-	var hexString = hexBox.value;
-	var temp = parseInt(hexString, 16);
-	
+{	
 	var intArray = new Int32Array(1);
-	intArray[0] = temp;
+	var hexString = hexBox.value;
+	intArray[0] = parseInt(hexString, 16);
 	SetValues(intArray.buffer);
 }
 
@@ -91,6 +85,17 @@ function UInt32Changed()
 	SetValues(uIntArray.buffer);
 }
 
+function AsciiChanged()
+{
+	var asciiArray = new Int8Array(4);
+	asciiArray[3] = asciiBox.value.charCodeAt(0);
+	asciiArray[2] = asciiBox.value.charCodeAt(1);
+	asciiArray[1] = asciiBox.value.charCodeAt(2);
+	asciiArray[0] = asciiBox.value.charCodeAt(3);
+
+	SetValues(asciiArray.buffer);
+}
+
 function SetValues(rawValueBuffer)
 {
 	var floatArray = new Float32Array(rawValueBuffer);
@@ -104,19 +109,54 @@ function SetValues(rawValueBuffer)
 	
 	hexBox.value = Math.abs(intArray[0]).toString(16);
 	
+	LoadAsciiBox(rawValueBuffer);
+	LoadShortBoxes(rawValueBuffer);
+	PadBinaryBoxesWithZeros();
+}
+
+function PadBinaryBoxesWithZeros()
+{
+	firstBinaryBox.value = "0000000000000000".slice(0, 16 - firstBinaryBox.value.length)
+						   + firstBinaryBox.value;
+	secondBinaryBox.value = "0000000000000000".slice(0, 16 - secondBinaryBox.value.length)
+							+ secondBinaryBox.value;
+}
+
+function LoadShortBoxes(rawValueBuffer)
+{
 	var shortArray = new Int16Array(rawValueBuffer, 0, 2);
 	firstShortBox.value = shortArray[0];
 	secondShortBox.value = shortArray[1];
-	
+
 	//Convert to Two's Complement if negative
 	if (shortArray[0] < 0) firstBinaryBox.value = (0xFFFF + shortArray[0] + 1).toString(2);
 	else firstBinaryBox.value = shortArray[0].toString(2);
 	
 	if (shortArray[1] < 0) secondBinaryBox.value = (0xFFFF + shortArray[1] + 1).toString(2);
 	else secondBinaryBox.value = shortArray[1].toString(2);
+}
+
+//Parses ascii values from raw value buffer & fills ascii box
+function LoadAsciiBox(rawValueBuffer)
+{
+	asciiBox.value = "";
+	var eightBitArray = new Int8Array(rawValueBuffer, 0, 4);
 	
-	firstBinaryBox.value = "0000000000000000".slice(0, 16 - firstBinaryBox.value.length) + firstBinaryBox.value;
-	secondBinaryBox.value = "0000000000000000".slice(0, 16 - secondBinaryBox.value.length) + secondBinaryBox.value;
+	for (var i = 3; i >= 0; i--)
+	{
+		if (IsPrintableCharacter(eightBitArray[i]))
+		{
+			asciiBox.value += String.fromCharCode(eightBitArray[i]);
+		}
+		else asciiBox.value += ".";
+	}
+}
+
+//determines if given character displays a visible symbol
+function IsPrintableCharacter(characterCode)
+{
+	return characterCode >= 32
+		   && characterCode != 127;
 }
 
 function DateTimeChanged()
