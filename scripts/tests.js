@@ -549,6 +549,30 @@ test ( "UInt32: IntMin", function() {
 	ResultsIntMin();
 });
 
+function ResultsDateTime()
+{
+	deepEqual(dateBox.value, "2018-12-31", "");
+	deepEqual(timeBox.value, "02:13:56", "");
+	deepEqual(unixTimeBox.value, "1546222436", "");
+}
+
+test ("DateTime: DateTime inputs produce correct unix time.", function() {
+	ClearAll();
+	let testDate = new Date('12/31/2018 2:13:56 AM UTC');
+	SetDateAndTimeBoxValues(testDate);
+	dateBox.onchange();
+	
+	ResultsDateTime();
+});
+
+test ("DateTime: Unix time input produces correct date/time.", function() {
+	ClearAll();
+	unixTimeBox.value = "1546222436";
+	unixTimeBox.onchange();
+	
+	ResultsDateTime();
+});
+
 //Tests to write:
 //max & min values of float
 //all max values plus one
