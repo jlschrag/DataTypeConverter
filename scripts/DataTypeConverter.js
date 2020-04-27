@@ -8,8 +8,11 @@ var int32Box;
 var uInt32Box;
 var asciiBox;
 
-var dateTimeBox;
+var dateBox;
+var timeBox;
 var unixTimeBox;
+
+const MILLISECONDS_IN_A_SECOND = 1000;
 
 window.onload = function()
 {
@@ -25,7 +28,8 @@ window.onload = function()
 	uInt32Box = document.getElementById('uInt32Box');
 	asciiBox = document.getElementById('asciiBox');
 	
-	dateTimeBox = document.getElementById('dateTimeBox');
+	dateBox = document.getElementById('dateBox');
+	timeBox = document.getElementById('timeBox');
 	unixTimeBox = document.getElementById('unixTimeBox');
 }
 
@@ -161,15 +165,16 @@ function IsPrintableCharacter(characterCode)
 
 function DateTimeChanged()
 {
-	var dateTime = new Date(dateTimeBox.value);
-	var unixSeconds = Math.round(dateTime.getTime() / 1000);
+	let dateTime = new Date(dateBox.value + 'T' + timeBox.value + 'Z');
+	let unixSeconds = Math.round(dateTime.getTime() / MILLISECONDS_IN_A_SECOND);
 	unixTimeBox.value = unixSeconds;
 }
 
 function UnixTimeChanged()
 {
-	var dateTime = new Date(parseInt(unixTimeBox.value) * 1000);
-	dateTimeBox.value = dateTime.toUTCString();
+	let seconds = parseInt(unixTimeBox.value);
+	let dateTime = new Date(seconds * MILLISECONDS_IN_A_SECOND);
+	SetDateAndTimeBoxValues(dateTime);
 }
 
 function ClearAll()
@@ -195,9 +200,15 @@ function InitializeForm()
 	int32Box.value = "0";
 	uInt32Box.value = "0";
 
-	var currentDateTime = new Date();
-	dateTimeBox.value = currentDateTime.toUTCString();
-	unixTimeBox.value = Math.round(currentDateTime.getTime() / 1000);
+	let currentDateTime = new Date();
+	SetDateAndTimeBoxValues(currentDateTime);
+	unixTimeBox.value = Math.round(currentDateTime.getTime() / MILLISECONDS_IN_A_SECOND);
+}
+
+function SetDateAndTimeBoxValues(dateTime)
+{
+	dateBox.value = dateTime.toISOString().substring(0, 10);
+	timeBox.value = dateTime.toISOString().substring(11, 19);
 }
 
 function ShowHideUnitTests()
